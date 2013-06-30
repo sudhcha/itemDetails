@@ -8,10 +8,9 @@ angular.module('itemDetails.controllers', ['itemDetails.services']).
         $scope.currentOption = $scope.options[0];
         $scope.details = [];
 
-        /** change current option, restart EventSource connection */
+        /** change current option, get data for table */
         $scope.setCurrentOption = function (option) {
             $scope.currentOption = option;
-            $scope.dataColl = $scope.currentOption.name;
             $scope.fetchData();
         };
         
@@ -28,7 +27,6 @@ angular.module('itemDetails.controllers', ['itemDetails.services']).
         	return allItems;
         };
 
-        /** start listening on messages from selected option */
         $scope.fetchData = function () {
         	
             $http.get('/'+$scope.currentOption.value).then(function(response) {
