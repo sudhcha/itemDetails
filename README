@@ -1,4 +1,2 @@
-This is your new Play 2.1 application
+A single page Item app with Play, AngularJS and d3Js
 =====================================
-
-This file will be packaged with your application, when using `play dist`.
