@@ -2,7 +2,7 @@ package controllers
 
 import play.api._
 import play.api.mvc._
-import play.api.libs.json.Json
+import play.api.libs.json._
 import models._
 
 object Application extends Controller {
@@ -12,17 +12,14 @@ object Application extends Controller {
   }
   
   def assortment = Action {
-	  Ok(Json.toJson(Item.all().map { i=>
-	    Json.obj("name" ->i.name,
-	        "value" -> i.quantity)
-	  }))	  
+	  Ok(Json.toJson(Item.all().map { i=> toJsonObj(i.quantity, i)}))	  
   }
   
   def price = Action {
-	  Ok(Json.toJson(Item.all().map { i=>
-	    Json.obj("name" ->i.name,
-	        "value" -> i.price)
-	  }))
-}
+	  Ok(Json.toJson(Item.all().map { i=> toJsonObj(i.price, i)}))
+  }
+  
+  def toJsonObj(value:Any, item:Item):JsObject = Json.obj("name" ->item.name,
+	        "value" -> value.toString)
   
 }
