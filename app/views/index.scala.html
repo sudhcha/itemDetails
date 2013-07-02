@@ -3,6 +3,29 @@
 <!DOCTYPE html>
 
 <html>
+<style>
+
+body {
+  font: 10px sans-serif;
+}
+
+.axis path,
+.axis line {
+  fill: none;
+  stroke: #000;
+  shape-rendering: crispEdges;
+}
+
+.bar {
+  fill: steelblue;
+}
+
+.x.axis path {
+  display: none;
+}
+
+</style>
+
     <head>
         <title>@title</title>
         <link rel="stylesheet" media="screen" href="@routes.Assets.at("stylesheets/main.css")">
@@ -10,7 +33,9 @@
         <link rel="shortcut icon" type="image/png" href="@routes.Assets.at("images/favicon.png")">
 
         <script src="@routes.WebJarAssets.at(WebJarAssets.locate("angular.min.js"))"></script>
+        <script src="@routes.WebJarAssets.at(WebJarAssets.locate("d3.min.js"))"></script>
         <script src="@routes.Assets.at("javascripts/app.js")"></script>
+        <script src="@routes.Assets.at("javascripts/barVisualization.js")"></script>
         <script src="@routes.Assets.at("javascripts/services.js")"></script>
         <script src="@routes.Assets.at("javascripts/controllers.js")"></script>        
         
@@ -21,6 +46,9 @@
       	Choose a report type:
       		<select ng-model="currentOption" ng-change="setCurrentOption(currentOption)" 
                   ng-options="o.name for o in options" id="optionSelect"></select>
+      	</div>
+      	<div>
+      	<bar-visualization val="details" ytext="currentOption.name"></bar-visualization>
       	</div>
       	<div>
       		<table class="table table-bordered table-hover">
